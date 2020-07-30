@@ -7,7 +7,7 @@ from player import Player
 from menus.death_menu import death_menu_func
 from menus.win_menu import win_menu_func
 from scripts import check_border, reset_board, check_death, print_board
-from obstacles import ObstacleSquare, ObstacleCross
+from obstacles import ObstacleSquare, ObstacleCross, ObstacleBigCross
 
 pygame.init()
 
@@ -50,53 +50,26 @@ def main(win):
         #     variables.obstacles_list.append(new_obstacle)
         if curr_time - last_obstacle_time > time_between_obstacles and not variables.death:
             last_obstacle_time = time.time()
-            new_obstacle = ObstacleCross(curr_time, variables.delay)
-            new_obstacle.set_obstacle()
-            variables.obstacles_list.append(new_obstacle)
-            new_obstacle = ObstacleSquare(curr_time, variables.delay)
-            new_obstacle.set_obstacle()
-            variables.obstacles_list.append(new_obstacle)
-
+            if random.randint(0, 1) % 2 == 0:
+                new_obstacle = ObstacleCross(curr_time, variables.delay)
+                new_obstacle.set_obstacle()
+                variables.obstacles_list.append(new_obstacle)
+                new_obstacle = ObstacleSquare(curr_time, variables.delay)
+                new_obstacle.set_obstacle()
+                variables.obstacles_list.append(new_obstacle)
+            else:
+                new_obstacle = ObstacleBigCross(curr_time, variables.delay)
+                new_obstacle.set_obstacle()
+                variables.obstacles_list.append(new_obstacle)
+                new_obstacle = ObstacleSquare(curr_time, variables.delay)
+                new_obstacle.set_obstacle()
+                variables.obstacles_list.append(new_obstacle)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
             # keyboard handling
             if event.type == pygame.KEYDOWN:
-                # only for dev
-                # if event.key == pygame.K_q:
-                #     new_obstacle = ObstacleCross(curr_time, variables.delay)
-                #     new_obstacle.set_obstacle()
-                #     variables.obstacles_list.append(new_obstacle)
-                #     new_obstacle = ObstacleSquare(curr_time, variables.delay)
-                #     new_obstacle.set_obstacle()
-                #     variables.obstacles_list.append(new_obstacle)
-                #     new_obstacle = ObstacleCross(curr_time, variables.delay)
-                #     new_obstacle.set_obstacle()
-                #     variables.obstacles_list.append(new_obstacle)
-                # if event.key == pygame.K_w:
-                #     new_obstacle = ObstacleCross(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
-                # if event.key == pygame.K_e:
-                #     new_obstacle = ObstacleBigCross(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
-                # if event.key == pygame.K_r:
-                #     new_obstacle = ObstacleDiagonal(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
-                # if event.key == pygame.K_t:
-                #     new_obstacle = ObstacleExclusively(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
-                # if event.key == pygame.K_y:
-                #     new_obstacle = ObstacleBoard1(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
-                #     new_obstacle = ObstacleBoard2(curr_time, delay)
-                #     new_obstacle.set_obstacle()
-                #     obstacles.append(new_obstacle)
                 # normal moving
                 if not variables.death and not pygame.key.get_pressed()[pygame.K_SPACE]:
                     if event.key == pygame.K_w and check_border(p.p_get_pos()[1] - 1):
@@ -129,8 +102,6 @@ def main(win):
 
         # updaing obstacles
         for _ in variables.obstacles_list:
-            _.update_obstacle()
-        for _ in variables.obstacles_homing_list:
             _.update_obstacle()
 
         # drawing window
