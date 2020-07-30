@@ -1,77 +1,79 @@
 import pygame
+import variables
+import time
 from board import board
-from menu import main_menu
-from levels import level01
+from menus import main_menu
 from scripts import contain
-import menu.death_menu
-
-
-# colors
-BLUE_DARK = (0, 132, 255)
-BLUE_LIGT = (68, 190, 199)
-YELLOW = (255, 195, 0)
-ORANGE = (255, 165, 0)
-RED = (250, 60, 76)
-VIOLET = (71, 39, 71)
-WHITE = (255, 255, 255)
-GREEN = (127, 255, 0)
-
-# basic lengths
-top_border = 200
-side_border = 575
-side_length = 70
+import menus.death_menu
 
 
 def draw_board_squares(win):
-    global top_border, side_border, side_length
     i = j = 0
     while i < 11:
         while j < 11:
             # type 0 -> NOTHING
             if contain(board[i][j], 0):
-                pygame.draw.rect(win, BLUE_LIGT, (side_border + i * side_length, top_border + j * side_length, side_length, side_length))
+                pygame.draw.rect(win, variables.BLUE_LIGT, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length, variables.side_length, variables.side_length))
             # type 2 is only for ObstacleExclusively
             # type 3 -> PHASE 1
             if contain(board[i][j], 3):
-                pygame.draw.rect(win, GREEN, (side_border + i * side_length, top_border + j * side_length, side_length, side_length))
+                pygame.draw.rect(win, variables.GREEN, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length, variables.side_length, variables.side_length))
             # type 4 -> PHASE 2 (deadly)
             if contain(board[i][j], 4):
-                pygame.draw.rect(win, RED, (side_border + i * side_length, top_border + j * side_length, side_length, side_length))
+                pygame.draw.rect(win, variables.RED, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length, variables.side_length, variables.side_length))
+            # type 5 -> PHASE 1 (ObstacleSquare)
+            if contain(board[i][j], 5):
+                win.blit(variables.square_img, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length))
+            # type 6 -> PHASE 1 (ObstacleCross)
+            if contain(board[i][j], 6):
+                win.blit(variables.corss_img, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length))
+            # type 7 -> PHASE 1 (ObstacleBigCross)
+            if contain(board[i][j], 7):
+                win.blit(variables.bigcross_img, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length))
+            # type 8 -> PHASE 1 (ObstacleDiagonal)
+            if contain(board[i][j], 8):
+                win.blit(variables.diagonal_img, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length))
             # type 1 -> PLAYER
             if contain(board[i][j], 1):
-                pygame.draw.rect(win, BLUE_DARK, (side_border + i * side_length + (side_length / 4), top_border + j * side_length + (side_length / 4), side_length / 2, side_length / 2))
+                pygame.draw.rect(win, variables.BLUE_DARK, (round(variables.side_border + i * variables.side_length + (variables.side_length / 4)), round(variables.top_border + j * variables.side_length + (variables.side_length / 4)), round(variables.side_length / 2), round(variables.side_length / 2)))
             j += 1
         j = 0
         i += 1
 
 
 def draw_board_lines(win):
-    global top_border, side_border, side_length
     i = j = 0
     while i <= 11:
         while j <= 11:
-            pygame.draw.line(win, WHITE, (side_border + side_length * i, top_border), (side_border + side_length * i, top_border + side_length * 11))
-            pygame.draw.line(win, WHITE, (side_border, top_border + side_length * j), (side_border + side_length * 11, top_border + side_length * j))
+            pygame.draw.line(win, variables.WHITE, (variables.side_border + variables.side_length * i, variables.top_border), (variables.side_border + variables.side_length * i, variables.top_border + variables.side_length * 11))
+            pygame.draw.line(win, variables.WHITE, (variables.side_border, variables.top_border + variables.side_length * j), (variables.side_border + variables.side_length * 11, variables.top_border + variables.side_length * j))
             j += 1
         j = 0
         i += 1
 
 
 def draw_death_screen(win):
-    font = pygame.font.SysFont('lucidaconsole', 80)
-    game_time = round(level01.death_time - level01.start_game_time)
-    textsurface = font.render('YOU HAVE LOST!', False, WHITE)
+    font = pygame.font.SysFont('lucidaconsole', variables.font_size_80)
+    game_time = round(variables.death_time - variables.start_game_time)
+    textsurface = font.render('YOU HAVE LOST!', False, variables.WHITE)
     win.blit(textsurface, ((main_menu.WIDTH - textsurface.get_width()) / 2, (((main_menu.HEIGHT - textsurface.get_height()) / 2) - 100)))
-    textsurface = font.render(('TIME: ' + str(game_time)), False, WHITE)
+    textsurface = font.render(('TIME: ' + str(game_time)), False, variables.WHITE)
     win.blit(textsurface, ((main_menu.WIDTH - textsurface.get_width()) / 2, (((main_menu.HEIGHT - textsurface.get_height()) / 2) + 0)))
-    textsurface = font.render('CLICK R TO PLAY AGAIN!', False, WHITE)
+    textsurface = font.render('CLICK R TO PLAY AGAIN!', False, variables.WHITE)
     win.blit(textsurface, ((main_menu.WIDTH - textsurface.get_width()) / 2, (((main_menu.HEIGHT - textsurface.get_height()) / 2) + 100)))
 
 
+def draw_progress(win):
+    font = pygame.font.SysFont('lucidaconsole', 80)
+    textsurface = font.render(str(round(time.time() - variables.start_game_time)) + ' / 121', False, variables.WHITE)
+    win.blit(textsurface, (0, 0))
+
+
 def draw(win):
-    win.fill(YELLOW)
+    win.fill(variables.YELLOW)
     draw_board_squares(win)
     draw_board_lines(win)
-    if level01.death:
-        menu.death_menu.death_menu(win)
+    draw_progress(win)
+    if variables.death:
+        menus.death_menu.death_menu_func(win)
     pygame.display.update()
