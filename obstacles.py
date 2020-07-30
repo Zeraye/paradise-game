@@ -1,6 +1,6 @@
 import random
 import time
-from levels import level01
+import variables
 from board import board
 from scripts import reset_pos, contain, reset_type
 
@@ -24,8 +24,7 @@ class ObstacleLines:
         # reseting obstacle
         # vertical
         if self.get_direction() % 2 == 0:
-            i = 0
-            j = 0
+            i = j = 0
             while j < self.width:
                 while i < 11:
                     reset_pos(self.get_number() + j, i, self.type)
@@ -34,8 +33,7 @@ class ObstacleLines:
                 j += 1
         # horizontal
         else:
-            i = 0
-            j = 0
+            i = j = 0
             while j < self.width:
                 while i < 11:
                     reset_pos(i, self.get_number() + j, self.type)
@@ -49,13 +47,12 @@ class ObstacleLines:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
         # vertical
         if self.get_direction() % 2 == 0:
-            i = 0
-            j = 0
+            i = j = 0
             while j < self.width:
                 while i < 11:
                     board[self.get_number() + j][i].append(self.type)
@@ -64,8 +61,7 @@ class ObstacleLines:
                 j += 1
         # horizontal
         else:
-            i = 0
-            j = 0
+            i = j = 0
             while j < self.width:
                 while i < 11:
                     board[i][self.get_number() + j].append(self.type)
@@ -80,19 +76,16 @@ class ObstacleSquare:
         self.delay = delay
         self.row = random.randint(1, 9)
         self.col = random.randint(1, 9)
-        print('row> ', self.row)
-        print('col> ', self.col)
-        self.type = 3
+        self.type = 5
 
     def get_pos(self):
         return self.row, self.col
 
     def update_obstacle(self):
-        if self.type == 3:
+        if self.type == 5:
             reset_pos(self.get_pos()[0], self.get_pos()[1], self.type)
         elif self.type == 4:
-            i = -1
-            j = -1
+            i = j = -1
             while i < 2:
                 while j < 2:
                     reset_pos(self.get_pos()[0] + i, self.get_pos()[1] + j, self.type)
@@ -100,20 +93,19 @@ class ObstacleSquare:
                 j = -1
                 i += 1
         if 0 <= (time.time() - self.start_time) < self.delay / 2:
-            self.type = 3
+            self.type = 5
             self.set_obstacle()
         elif self.delay / 2 <= (time.time() - self.start_time) <= self.delay * 0.75:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
-        if self.type == 3:
+        if self.type == 5:
             board[self.get_pos()[0]][self.get_pos()[1]].append(self.type)
         elif self.type == 4:
-            i = -1
-            j = -1
+            i = j = -1
             while i < 2:
                 while j < 2:
                     board[self.get_pos()[0] + i][self.get_pos()[1] + j].append(self.type)
@@ -128,13 +120,13 @@ class ObstacleCross:
         self.delay = delay
         self.row = random.randint(1, 9)
         self.col = random.randint(1, 9)
-        self.type = 3
+        self.type = 6
 
     def get_pos(self):
         return self.row, self.col
 
     def update_obstacle(self):
-        if self.type == 3:
+        if self.type == 6:
             reset_pos(self.get_pos()[0], self.get_pos()[1], self.type)
         elif self.type == 4:
             reset_pos(self.get_pos()[0], self.get_pos()[1], self.type)
@@ -143,16 +135,16 @@ class ObstacleCross:
             reset_pos(self.get_pos()[0] - 1, self.get_pos()[1], self.type)
             reset_pos(self.get_pos()[0] + 1, self.get_pos()[1], self.type)
         if 0 <= (time.time() - self.start_time) < self.delay / 2:
-            self.type = 3
+            self.type = 6
             self.set_obstacle()
         elif self.delay / 2 <= (time.time() - self.start_time) <= self.delay * 0.75:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
-        if self.type == 3:
+        if self.type == 6:
             board[self.get_pos()[0]][self.get_pos()[1]].append(self.type)
         elif self.type == 4:
             board[self.get_pos()[0]][self.get_pos()[1]].append(self.type)
@@ -168,13 +160,13 @@ class ObstacleBigCross:
         self.delay = delay
         self.row = random.randint(1, 9)
         self.col = random.randint(1, 9)
-        self.type = 3
+        self.type = 7
 
     def get_pos(self):
         return self.row, self.col
 
     def update_obstacle(self):
-        if self.type == 3:
+        if self.type == 7:
             reset_pos(self.get_pos()[0], self.get_pos()[1], self.type)
         elif self.type == 4:
             i = 0
@@ -186,16 +178,16 @@ class ObstacleBigCross:
                 reset_pos(i, self.get_pos()[1], self.type)
                 i += 1
         if 0 <= (time.time() - self.start_time) < self.delay / 2:
-            self.type = 3
+            self.type = 7
             self.set_obstacle()
         elif self.delay / 2 <= (time.time() - self.start_time) <= self.delay * 0.75:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
-        if self.type == 3:
+        if self.type == 7:
             board[self.get_pos()[0]][self.get_pos()[1]].append(self.type)
         elif self.type == 4:
             i = 0
@@ -214,13 +206,13 @@ class ObstacleDiagonal:
         self.delay = delay
         self.row = random.randint(1, 9)
         self.col = random.randint(1, 9)
-        self.type = 3
+        self.type = 8
 
     def get_pos(self):
         return self.row, self.col
 
     def update_obstacle(self):
-        if self.type == 3:
+        if self.type == 8:
             reset_pos(self.get_pos()[0], self.get_pos()[1], self.type)
         elif self.type == 4:
             x, y = self.get_pos()
@@ -244,16 +236,16 @@ class ObstacleDiagonal:
                 x += 1
                 y += 1
         if 0 <= (time.time() - self.start_time) < self.delay / 2:
-            self.type = 3
+            self.type = 8
             self.set_obstacle()
         elif self.delay / 2 <= (time.time() - self.start_time) <= self.delay * 0.75:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
-        if self.type == 3:
+        if self.type == 8:
             board[self.get_pos()[0]][self.get_pos()[1]].append(self.type)
         elif self.type == 4:
             x, y = self.get_pos()
@@ -322,7 +314,7 @@ class ObstacleExclusively:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
         if self.type == 3:
@@ -384,7 +376,7 @@ class ObstacleBoard1:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
         if self.type == 3:
@@ -439,7 +431,7 @@ class ObstacleBoard2:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
         if self.type == 3:
@@ -490,10 +482,10 @@ class ObstacleRandomSafe:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
-            new_obstacle = ObstacleRandomDanger(time.time(), level01.delay, self.array2)
+            variables.obstacles_list.pop(0)
+            new_obstacle = ObstacleRandomDanger(time.time(), self.delay, self.array2)
             new_obstacle.set_obstacle()
-            level01.obstacles.append(new_obstacle)
+            variables.obstacles_list.append(new_obstacle)
 
     def set_obstacle(self):
         if self.type == 3:
@@ -530,7 +522,7 @@ class ObstacleRandomDanger:
             self.type = 4
             self.set_obstacle()
         else:
-            level01.obstacles.pop(0)
+            variables.obstacles_list.pop(0)
 
     def set_obstacle(self):
         if self.type == 4:
@@ -548,8 +540,8 @@ class ObstacleHoming:
         self.type = 4
         self.p_row = pos[0]
         self.p_col = pos[1]
-        self.o_row = level01.last_homing_pos[0]
-        self.o_col = level01.last_homing_pos[1]
+        self.o_row = variables.last_homing_pos[0]
+        self.o_col = variables.last_homing_pos[1]
         self.last_pos = [0, 0]
 
     def get_p_pos(self):
@@ -568,10 +560,10 @@ class ObstacleHoming:
 
     def update_obstacle(self):
         if 0.5 <= (time.time() - self.start_time) <= 1:
-            reset_pos(level01.last_homing_pos[0], level01.last_homing_pos[1], 3)
+            reset_pos(variables.last_homing_pos[0], variables.last_homing_pos[1], 3)
             reset_pos(self.last_pos[0], self.last_pos[1], 4)
-            level01.obstacles.pop(0)
-            level01.homing = False
+            variables.obstacles_homing_list.pop(0)
+            variables.homing = False
 
     def set_obstacle(self):
         board[self.get_o_pos()[0]][self.get_o_pos()[1]].append(4)
@@ -587,5 +579,5 @@ class ObstacleHoming:
             else:
                 self.increase_o_pos([0, 1])
         board[self.get_o_pos()[0]][self.get_o_pos()[1]].append(3)
-        level01.last_homing_pos[0] = self.get_o_pos()[0]
-        level01.last_homing_pos[1] = self.get_o_pos()[1]
+        variables.last_homing_pos[0] = self.get_o_pos()[0]
+        variables.last_homing_pos[1] = self.get_o_pos()[1]
