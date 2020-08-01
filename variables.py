@@ -25,6 +25,7 @@ bigcross_img = pygame.transform.scale(bigcross_img, (side_length, side_length))
 diagonal_img = pygame.image.load(os.path.join(os.getcwd(), './images/Diagonal.png')).convert_alpha()
 diagonal_img = pygame.transform.scale(diagonal_img, (side_length, side_length))
 
+
 # colors
 BLUE_DARK = (0, 132, 255)
 BLUE_LIGT = (68, 190, 199)
@@ -38,11 +39,17 @@ GREEN = (127, 255, 0)
 # gameplay settings
 obstacles_list = []
 obstacles_homing_list = []
-delay = 1.5
-death = False
-death_time = start_game_time = 0
+
 homing = False
-last_homing_pos = [0, 10]
+last_homing_pos = [0, 0]
+
+delay = 2.3
+death = False
+
+death_time = start_game_time = 0
+
+current_obstacle_number = 0
+
 
 # fonts
 font_size_100 = round((100 * screenObject.current_w) / 1920)
