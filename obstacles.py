@@ -360,22 +360,46 @@ class ObstacleExclusively:
                 self.type = 4
                 self.set_obstacle()
         elif (time.time() - self.start_time) > self.delay * 0.75 and self.setted2:
-            i = j = -2
-            while i < 3:
-                while j < 3:
-                    board[self.row + i][self.col + j].append(2)
-                    j += 1
-                j = -2
-                i += 1
-            i = j = 0
-            while i < 11:
-                while j < 11:
-                    if not contain(board[i][j], 2):
-                        reset_pos(i, j, self.type)
-                    j += 1
-                j = 0
-                i += 1
-            reset_type(2)
+            # TODO: setting deadly obstacles
+            y = self.col - 2
+            temp_array = []
+            if y > 0:
+                i = j = 0
+                while i < y:
+                    while j < 11:
+                        reset_pos(j, i, self.type)
+                        temp_array.append(i)
+                        j += 1
+                    j = 0
+                    i += 1
+            y = i + 5
+            while y < 11:
+                i = j = 0
+                while i < 11:
+                    reset_pos(i, y, self.type)
+                    temp_array.append(y)
+                    i += 1
+                i = 0
+                y += 1
+            x = self.row - 2
+            if x > 0:
+                i = j = 0
+                while i < x:
+                    while j < 11:
+                        if not contain(temp_array, j):
+                            reset_pos(i, j, self.type)
+                        j += 1
+                    j = 0
+                    i += 1
+            x = i + 5
+            while x < 11:
+                i = j = 0
+                while i < 11:
+                    if not contain(temp_array, i):
+                        reset_pos(x, i, self.type)
+                    i += 1
+                i = 0
+                x += 1
             for _ in variables.obstacles_list:
                 if _.get_start_time() == self.start_time:
                     variables.obstacles_list.remove(_)
@@ -391,22 +415,46 @@ class ObstacleExclusively:
                 i += 1
             self.setted1 = True
         elif self.type == 4:
-            i = j = -2
-            while i < 3:
-                while j < 3:
-                    board[self.row + i][self.col + j].append(2)
-                    j += 1
-                j = -2
-                i += 1
-            i = j = 0
-            while i < 11:
-                while j < 11:
-                    if not contain(board[i][j], 2):
-                        board[i][j].append(self.type)
-                    j += 1
-                j = 0
-                i += 1
-            reset_type(2)
+            # TODO: setting deadly obstacles
+            y = self.col - 2
+            temp_array = []
+            if y > 0:
+                i = j = 0
+                while i < y:
+                    while j < 11:
+                        board[j][i].append(self.type)
+                        temp_array.append(i)
+                        j += 1
+                    j = 0
+                    i += 1
+            y = i + 5
+            while y < 11:
+                i = j = 0
+                while i < 11:
+                    board[i][y].append(self.type)
+                    temp_array.append(y)
+                    i += 1
+                i = 0
+                y += 1
+            x = self.row - 2
+            if x > 0:
+                i = j = 0
+                while i < x:
+                    while j < 11:
+                        if not contain(temp_array, j):
+                            board[i][j].append(self.type)
+                        j += 1
+                    j = 0
+                    i += 1
+            x = i + 5
+            while x < 11:
+                i = j = 0
+                while i < 11:
+                    if not contain(temp_array, i):
+                        board[x][i].append(self.type)
+                    i += 1
+                i = 0
+                x += 1
             self.setted2 = True
 
 
