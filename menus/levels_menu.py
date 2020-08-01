@@ -1,7 +1,5 @@
 import pygame
 import levels.level01
-import levels.level02
-import levels.level03
 import variables
 from menus import main_menu
 
@@ -85,10 +83,6 @@ def levels_menu_func(win):
                     level = i * 4 + j + 1
                     if level == 1:
                         levels.level01.main(win)
-                    elif level == 2:
-                        levels.level02.main(win)
-                    elif level == 3:
-                        levels.level03.main(win)
 
                 if event.key == pygame.K_RIGHT and j < 3:
                     levels_clear()

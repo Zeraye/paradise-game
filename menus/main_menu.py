@@ -40,6 +40,7 @@ def main_menu_func(win):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
+                    variables.current_obstacle_number = 0
                     levels_menu_func(win)
 
                 if event.key == pygame.K_ESCAPE:
