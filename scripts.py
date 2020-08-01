@@ -1,5 +1,7 @@
-from board import board
 import random
+import numbers_list
+import variables
+from board import board
 
 
 def update_pos(row, col, obstacle_type):
@@ -7,8 +9,13 @@ def update_pos(row, col, obstacle_type):
 
 
 def reset_pos(row, col, obstacle_type):
-    if contain(board[row][col], obstacle_type):
-        board[row][col].remove(obstacle_type)
+    i = 0
+    for _ in board[row][col]:
+        if board[row][col][i] == obstacle_type:
+            board[row][col].pop(i)
+            return
+        else:
+            i += 1
 
 
 def reset_type(obstacle_type):
@@ -23,8 +30,7 @@ def reset_type(obstacle_type):
 
 
 def reset_board():
-    i = 0
-    j = 0
+    i = j = 0
     while i < 11:
         while j < 11:
             board[i][j] = [0]
@@ -41,8 +47,7 @@ def contain(array, obstacle_type):
 
 
 def search_by_type(obstacle_type):
-    i = 0
-    j = 0
+    i = j = 0
     arr = []
     while i < 11:
         while j < 11:
@@ -70,18 +75,20 @@ def random_array():
     array1 = []
     array2 = []
     i = 0
-    while i < 61:
+    while i < 60:
         x = random.randint(0, 10)
         y = random.randint(0, 10)
         if not contain(array1, [x, y]) and not x == y == 5:
             array1.append([x, y])
+            print(i)
             i += 1
     i = 0
-    while i < 61:
+    while i < 60:
         x = random.randint(0, 10)
         y = random.randint(0, 10)
-        if not contain(array1, [x, y]) and not x == y == 5:
+        if not contain(array1, [x, y]) and not contain(array2, [x, y]) and not x == y == 5:
             array2.append([x, y])
+            print(i)
             i += 1
     return array1, array2
 
@@ -92,3 +99,36 @@ def print_board():
     while i < len(board):
         print(board[i])
         i += 1
+
+
+def give_randon(start, end):
+    variables.current_obstacle_number += 1
+    if start == 0:
+        if end == 1:
+            return numbers_list.list_01[variables.current_obstacle_number]
+        elif end == 2:
+            return numbers_list.list_02[variables.current_obstacle_number]
+        elif end == 3:
+            return numbers_list.list_03[variables.current_obstacle_number]
+        elif end == 4:
+            return numbers_list.list_04[variables.current_obstacle_number]
+        elif end == 5:
+            return numbers_list.list_05[variables.current_obstacle_number]
+        elif end == 6:
+            return numbers_list.list_06[variables.current_obstacle_number]
+        elif end == 7:
+            return numbers_list.list_07[variables.current_obstacle_number]
+        elif end == 8:
+            return numbers_list.list_08[variables.current_obstacle_number]
+        elif end == 9:
+            return numbers_list.list_09[variables.current_obstacle_number]
+        elif end == 10:
+            return numbers_list.list_010[variables.current_obstacle_number]
+        elif end == 11:
+            return numbers_list.list_011[variables.current_obstacle_number]
+    elif start == 1:
+        if end == 9:
+            return numbers_list.list_19[variables.current_obstacle_number]
+    elif start == 2:
+        if end == 8:
+            return numbers_list.list_28[variables.current_obstacle_number]
