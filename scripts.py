@@ -102,6 +102,8 @@ def print_board():
 
 
 def give_randon(start, end):
+    if variables.current_obstacle_number > 999:
+        variables.current_obstacle_number = 0
     variables.current_obstacle_number += 1
     if start == 0:
         if end == 1:
