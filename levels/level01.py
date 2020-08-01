@@ -23,13 +23,13 @@ def main(win):
         if time.time() - variables.start_game_time > 10:
             variables.start_game_time = time.time()
             win_menu_func(win)
-        if not variables.homing:
-            variables.homing = True
-            time.sleep(0.001)
-            new_obstacle = ObstacleHoming(time.time(), variables.delay, p.p_get_pos())
-            new_obstacle.set_obstacle()
-            variables.obstacles_homing_list.append(new_obstacle)
-            time.sleep(0.001)
+        # if not variables.homing:
+        #     variables.homing = True
+        #     time.sleep(0.001)
+        #     new_obstacle = ObstacleHoming(time.time(), variables.delay, p.p_get_pos())
+        #     new_obstacle.set_obstacle()
+        #     variables.obstacles_homing_list.append(new_obstacle)
+        #     time.sleep(0.001)
         # if curr_time - last_obstacle_time > time_between_obstacles and not variables.death:
         #     time.sleep(0.001)
         #     last_obstacle_time = time.time()
@@ -49,7 +49,15 @@ def main(win):
             if event.type == pygame.KEYDOWN:
                 # only for dev
                 if event.key == pygame.K_q:
-                    pass
+                    time.sleep(0.001)
+                    new_obstacle = ObstacleExclusively(time.time(), variables.delay, give_randon(2, 8), give_randon(2, 8))
+                    variables.obstacles_list.append(new_obstacle)
+                    time.sleep(0.001)
+                if event.key == pygame.K_e:
+                    time.sleep(0.001)
+                    new_obstacle = ObstacleLines(time.time(), variables.delay, 5, give_randon(0, 6), give_randon(0, 1))
+                    variables.obstacles_list.append(new_obstacle)
+                    time.sleep(0.001)
                 if event.key == pygame.K_ESCAPE:
                     run = False
                     pygame.quit()
