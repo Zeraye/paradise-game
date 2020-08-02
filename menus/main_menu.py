@@ -14,7 +14,8 @@ def draw_main_menu(win, menu):
         win.blit(variables.main_menu_start_img, ((main.WIDTH-variables.main_menu_start_img.get_width())/2, (main.HEIGHT-variables.main_menu_start_img.get_height())/2))
     elif menu == 2:
         win.blit(variables.main_menu_options_img, ((main.WIDTH-variables.main_menu_options_img.get_width())/2, (main.HEIGHT-variables.main_menu_options_img.get_height())/2))
-
+    elif menu == 3:
+        win.blit(variables.main_menu_quit_img, ((main.WIDTH-variables.main_menu_quit_img.get_width())/2, (main.HEIGHT-variables.main_menu_quit_img.get_height())/2))
 
 def draw_menu(win, menu):
     win.fill(variables.BLACK)
@@ -38,12 +39,15 @@ def main_menu_func(win):
                         levels_menu_func(win)
                     if menu == 2:
                         options_menu_func(win)
+                    if menu == 3:
+                        run = False
+                        pygame.quit()
 
-                elif event.key == pygame.K_UP:
-                    menu = 1
+                elif event.key == pygame.K_UP and menu > 0:
+                    menu -= 1
 
-                elif event.key == pygame.K_DOWN:
-                    menu = 2
+                elif event.key == pygame.K_DOWN and menu < 3:
+                    menu += 1
 
                 elif event.key == pygame.K_ESCAPE:
                     run = False

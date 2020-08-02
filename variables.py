@@ -31,6 +31,8 @@ main_menu_start_img = pygame.image.load(os.path.join(os.getcwd(), './images/Main
 main_menu_start_img = pygame.transform.scale(main_menu_start_img, (round((main_menu_start_img.get_width()*screenObject.current_w)/1920), round((main_menu_start_img.get_height()*screenObject.current_h)/1080)))
 main_menu_options_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuOptions.png'))
 main_menu_options_img = pygame.transform.scale(main_menu_options_img, (round((main_menu_options_img.get_width()*screenObject.current_w)/1920), round((main_menu_options_img.get_height()*screenObject.current_h)/1080)))
+main_menu_quit_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuQuit.png'))
+main_menu_quit_img = pygame.transform.scale(main_menu_quit_img, (round((main_menu_quit_img.get_width()*screenObject.current_w)/1920), round((main_menu_quit_img.get_height()*screenObject.current_h)/1080)))
 starting_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/StartingMenu.png'))
 starting_menu_img = pygame.transform.scale(starting_menu_img, (round((starting_menu_img.get_width()*screenObject.current_w)/1920), round((starting_menu_img.get_height()*screenObject.current_h)/1080)))
 
