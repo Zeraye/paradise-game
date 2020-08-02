@@ -25,6 +25,15 @@ bigcross_img = pygame.transform.scale(bigcross_img, (side_length, side_length))
 diagonal_img = pygame.image.load(os.path.join(os.getcwd(), './images/Diagonal.png')).convert_alpha()
 diagonal_img = pygame.transform.scale(diagonal_img, (side_length, side_length))
 
+main_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenu.png'))
+main_menu__img = pygame.transform.scale(main_menu_img, (round((main_menu_img.get_width()*screenObject.current_w)/1920), round((main_menu_img.get_height()*screenObject.current_h)/1080)))
+main_menu_start_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuStart.png'))
+main_menu_start_img = pygame.transform.scale(main_menu_start_img, (round((main_menu_start_img.get_width()*screenObject.current_w)/1920), round((main_menu_start_img.get_height()*screenObject.current_h)/1080)))
+main_menu_options_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuOptions.png'))
+main_menu_options_img = pygame.transform.scale(main_menu_options_img, (round((main_menu_options_img.get_width()*screenObject.current_w)/1920), round((main_menu_options_img.get_height()*screenObject.current_h)/1080)))
+starting_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/StartingMenu.png'))
+starting_menu_img = pygame.transform.scale(starting_menu_img, (round((starting_menu_img.get_width()*screenObject.current_w)/1920), round((starting_menu_img.get_height()*screenObject.current_h)/1080)))
+
 
 # colors
 BLUE_DARK = (0, 132, 255)
@@ -35,6 +44,8 @@ RED = (250, 60, 76)
 VIOLET = (71, 39, 71)
 WHITE = (255, 255, 255)
 GREEN = (127, 255, 0)
+BLACK = (0, 0, 0)
+
 
 # gameplay settings
 obstacles_list = []
