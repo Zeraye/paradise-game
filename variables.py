@@ -26,7 +26,7 @@ diagonal_img = pygame.image.load(os.path.join(os.getcwd(), './images/Diagonal.pn
 diagonal_img = pygame.transform.scale(diagonal_img, (side_length, side_length))
 
 main_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenu.png'))
-main_menu__img = pygame.transform.scale(main_menu_img, (round((main_menu_img.get_width()*screenObject.current_w)/1920), round((main_menu_img.get_height()*screenObject.current_h)/1080)))
+main_menu_img = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd(), './images/MainMenu.png')), (round((main_menu_img.get_width()*screenObject.current_w)/1920), round((main_menu_img.get_height()*screenObject.current_h)/1080)))
 main_menu_start_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuStart.png'))
 main_menu_start_img = pygame.transform.scale(main_menu_start_img, (round((main_menu_start_img.get_width()*screenObject.current_w)/1920), round((main_menu_start_img.get_height()*screenObject.current_h)/1080)))
 main_menu_options_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainMenuOptions.png'))
