@@ -1,35 +1,29 @@
 import pygame
 import variables
 from menus.levels_menu import levels_menu_func
+from menus.options_menu import options_menu_func
+import main
 
-pygame.init()
-screenObject = pygame.display.Info()
-WIDTH = screenObject.current_w
-HEIGHT = screenObject.current_h
-WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
-pygame.display.set_caption('Paradise')
+menu = 0
 
 
-def draw_title(win):
-    font = pygame.font.SysFont('lucidaconsole', variables.font_size_100, bold=True)
-    textsurface = font.render("Don't touch RED square!", False, variables.RED)
-    win.blit(textsurface, (round(WIDTH - textsurface.get_width()) / 2, round((HEIGHT - textsurface.get_height()) / 2) - 100))
+def draw_main_menu(win, menu):
+    if menu == 0:
+        win.blit(variables.main_menu_img, ((main.WIDTH-variables.main_menu_img.get_width())/2, (main.HEIGHT-variables.main_menu_img.get_height())/2))
+    elif menu == 1:
+        win.blit(variables.main_menu_start_img, ((main.WIDTH-variables.main_menu_start_img.get_width())/2, (main.HEIGHT-variables.main_menu_start_img.get_height())/2))
+    elif menu == 2:
+        win.blit(variables.main_menu_options_img, ((main.WIDTH-variables.main_menu_options_img.get_width())/2, (main.HEIGHT-variables.main_menu_options_img.get_height())/2))
 
 
-def draw_start(win):
-    font = pygame.font.SysFont('lucidaconsole', variables.font_size_80)
-    textsurface = font.render("Click ENTER to start game", False, variables.BLUE_LIGT)
-    win.blit(textsurface, (round(WIDTH - textsurface.get_width()) / 2, round((HEIGHT - textsurface.get_height()) / 2) + 100))
-
-
-def draw_menu(win):
-    win.fill(variables.YELLOW)
-    draw_title(win)
-    draw_start(win)
+def draw_menu(win, menu):
+    win.fill(variables.BLACK)
+    draw_main_menu(win, menu)
     pygame.display.update()
 
 
 def main_menu_func(win):
+    global menu
     run = True
     while run:
         pygame.time.Clock().tick(60)
@@ -40,14 +34,19 @@ def main_menu_func(win):
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    variables.current_obstacle_number = 0
-                    levels_menu_func(win)
+                    if menu == 1:
+                        levels_menu_func(win)
+                    if menu == 2:
+                        options_menu_func(win)
 
-                if event.key == pygame.K_ESCAPE:
+                elif event.key == pygame.K_UP:
+                    menu = 1
+
+                elif event.key == pygame.K_DOWN:
+                    menu = 2
+
+                elif event.key == pygame.K_ESCAPE:
                     run = False
                     pygame.quit()
 
-        draw_menu(win)
-
-
-main_menu_func(WIN)
+        draw_menu(win, menu)
