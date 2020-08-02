@@ -1,7 +1,7 @@
 import pygame
 import levels.level01
 import variables
-from menus import main_menu
+import main
 
 levels_list = [
     [True, False, False, False],
@@ -13,7 +13,7 @@ levels_list = [
 def draw_title(win):
     font = pygame.font.SysFont('lucidaconsole', variables.font_size_80)
     textsurface = font.render('Levels', False, variables.RED)
-    win.blit(textsurface, (round((main_menu.WIDTH - textsurface.get_width()) / 2), variables.scale(50)))
+    win.blit(textsurface, (round((main.WIDTH - textsurface.get_width()) / 2), variables.scale(50)))
 
 
 def draw_levels(win):
