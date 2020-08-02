@@ -681,7 +681,6 @@ class ObstacleHoming:
         self.o_row = variables.last_homing_pos[0]
         self.o_col = variables.last_homing_pos[1]
         self.last_pos = [0, 0]
-        print('init homing')
 
     def get_p_pos(self):
         return self.p_row, self.p_col
@@ -698,7 +697,6 @@ class ObstacleHoming:
         self.o_col += pos[1]
 
     def update_obstacle(self):
-        print('update homing')
         if 0.5 <= (time.time() - self.start_time) <= 1:
             reset_pos(variables.last_homing_pos[0], variables.last_homing_pos[1], 3)
             reset_pos(self.last_pos[0], self.last_pos[1], 4)
@@ -706,7 +704,6 @@ class ObstacleHoming:
             variables.homing = False
 
     def set_obstacle(self):
-        print('set homing')
         board[self.get_o_pos()[0]][self.get_o_pos()[1]].append(4)
         self.last_pos = [self.get_o_pos()[0], self.get_o_pos()[1]]
         if abs(self.get_o_pos()[0] - self.get_p_pos()[0]) > abs(self.get_o_pos()[1] - self.get_p_pos()[1]):
