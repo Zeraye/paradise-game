@@ -1,17 +1,18 @@
 import pygame
 import variables
 from menus import main_menu
+import main
 
 
 def draw_texts(win):
     font = pygame.font.SysFont('lucidaconsole', variables.font_size_100, bold=True)
     textsurface = font.render("Don't touch RED square!", False, variables.RED)
-    win.blit(textsurface, (round(main_menu.WIDTH - textsurface.get_width()) / 2, round((main_menu.HEIGHT - textsurface.get_height()) / 2) - 150))
+    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) - 150))
     font = pygame.font.SysFont('lucidaconsole', variables.font_size_80)
     textsurface = font.render('You have won!', False, variables.BLUE_LIGT)
-    win.blit(textsurface, (round(main_menu.WIDTH - textsurface.get_width()) / 2, round((main_menu.HEIGHT - textsurface.get_height()) / 2) + 50))
+    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) + 50))
     textsurface = font.render('Click ENTER to return to menus', False, variables.BLUE_LIGT)
-    win.blit(textsurface, (round(main_menu.WIDTH - textsurface.get_width()) / 2, round((main_menu.HEIGHT - textsurface.get_height()) / 2) + 250))
+    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) + 250))
 
 
 def draw_menu(win):

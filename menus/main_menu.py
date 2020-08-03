@@ -36,8 +36,10 @@ def main_menu_func(win):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     if menu == 1:
+                        menu = 0
                         levels_menu_func(win)
                     if menu == 2:
+                        menu = 0
                         options_menu_func(win)
                     if menu == 3:
                         run = False
@@ -48,9 +50,5 @@ def main_menu_func(win):
 
                 elif event.key == pygame.K_DOWN and menu < 3:
                     menu += 1
-
-                elif event.key == pygame.K_ESCAPE:
-                    run = False
-                    pygame.quit()
 
         draw_menu(win, menu)

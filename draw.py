@@ -3,7 +3,7 @@ import variables
 import time
 from board import board
 from menus import main_menu
-from scripts import contain
+from scripts import contain, reformated_number
 import menus.death_menu
 
 
@@ -13,7 +13,7 @@ def draw_board_squares(win):
         while j < 11:
             # type 0 -> NOTHING
             if contain(board[i][j], 0):
-                pygame.draw.rect(win, variables.BLUE_LIGT, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length, variables.side_length, variables.side_length))
+                pygame.draw.rect(win, variables.WHITE, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length, variables.side_length, variables.side_length))
             # type 2 is only for ObstacleExclusively
             # type 3 -> PHASE 1
             if contain(board[i][j], 3):
@@ -35,7 +35,7 @@ def draw_board_squares(win):
                 win.blit(variables.diagonal_img, (variables.side_border + i * variables.side_length, variables.top_border + j * variables.side_length))
             # type 1 -> PLAYER
             if contain(board[i][j], 1):
-                pygame.draw.rect(win, variables.BLUE_DARK, (round(variables.side_border + i * variables.side_length + (variables.side_length / 4)), round(variables.top_border + j * variables.side_length + (variables.side_length / 4)), round(variables.side_length / 2), round(variables.side_length / 2)))
+                pygame.draw.rect(win, variables.BLACK, (round(variables.side_border + i * variables.side_length + (variables.side_length / 4)), round(variables.top_border + j * variables.side_length + (variables.side_length / 4)), round(variables.side_length / 2), round(variables.side_length / 2)))
             j += 1
         j = 0
         i += 1
@@ -45,8 +45,8 @@ def draw_board_lines(win):
     i = j = 0
     while i <= 11:
         while j <= 11:
-            pygame.draw.line(win, variables.WHITE, (variables.side_border + variables.side_length * i, variables.top_border), (variables.side_border + variables.side_length * i, variables.top_border + variables.side_length * 11))
-            pygame.draw.line(win, variables.WHITE, (variables.side_border, variables.top_border + variables.side_length * j), (variables.side_border + variables.side_length * 11, variables.top_border + variables.side_length * j))
+            pygame.draw.line(win, variables.BLACK, (variables.side_border + variables.side_length * i, variables.top_border), (variables.side_border + variables.side_length * i, variables.top_border + variables.side_length * 11))
+            pygame.draw.line(win, variables.BLACK, (variables.side_border, variables.top_border + variables.side_length * j), (variables.side_border + variables.side_length * 11, variables.top_border + variables.side_length * j))
             j += 1
         j = 0
         i += 1
@@ -64,13 +64,13 @@ def draw_death_screen(win):
 
 
 def draw_progress(win):
-    font = pygame.font.SysFont('lucidaconsole', 80)
-    textsurface = font.render(str(round(time.time() - variables.start_game_time)) + ' / 121', False, variables.WHITE)
+    font = pygame.font.Font('fonts/ARCADECLASSIC.TTF', 80)
+    textsurface = font.render(str(reformated_number(121 - round(time.time() - variables.start_game_time))), False, variables.WHITE)
     win.blit(textsurface, (0, 0))
 
 
 def draw(win):
-    win.fill(variables.YELLOW)
+    win.fill(variables.BLACK)
     draw_board_squares(win)
     draw_board_lines(win)
     draw_progress(win)

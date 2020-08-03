@@ -71,6 +71,16 @@ def check_death(row, col):
     return contain(board[row][col], 4)
 
 
+def reformated_number(number):
+    number = str(number)
+    if int(number) < 10:
+        return '0' + '0' + number
+    elif 10 <= int(number) < 100:
+        return '0' + number
+    else:
+        return number
+
+
 def random_array():
     array1 = []
     array2 = []

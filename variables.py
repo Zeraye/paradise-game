@@ -35,6 +35,8 @@ main_menu_quit_img = pygame.image.load(os.path.join(os.getcwd(), './images/MainM
 main_menu_quit_img = pygame.transform.scale(main_menu_quit_img, (round((main_menu_quit_img.get_width()*screenObject.current_w)/1920), round((main_menu_quit_img.get_height()*screenObject.current_h)/1080)))
 starting_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/StartingMenu.png'))
 starting_menu_img = pygame.transform.scale(starting_menu_img, (round((starting_menu_img.get_width()*screenObject.current_w)/1920), round((starting_menu_img.get_height()*screenObject.current_h)/1080)))
+levels_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/LevelsMenu.png')).convert_alpha()
+levels_menu_img = pygame.transform.scale(levels_menu_img, (round((levels_menu_img.get_width()*screenObject.current_w)/1920), round((levels_menu_img.get_height()*screenObject.current_h)/1080)))
 
 
 # colors
@@ -42,10 +44,12 @@ BLUE_DARK = (0, 132, 255)
 BLUE_LIGT = (68, 190, 199)
 YELLOW = (255, 195, 0)
 ORANGE = (255, 165, 0)
-RED = (250, 60, 76)
+# RED = (250, 60, 76)
+RED = (255, 0, 0)
 VIOLET = (71, 39, 71)
 WHITE = (255, 255, 255)
-GREEN = (127, 255, 0)
+# GREEN = (127, 255, 0)
+GREEN = (0, 255, 0)
 BLACK = (0, 0, 0)
 
 
