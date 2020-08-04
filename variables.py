@@ -37,6 +37,10 @@ starting_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/Starti
 starting_menu_img = pygame.transform.scale(starting_menu_img, (round((starting_menu_img.get_width()*screenObject.current_w)/1920), round((starting_menu_img.get_height()*screenObject.current_h)/1080)))
 levels_menu_img = pygame.image.load(os.path.join(os.getcwd(), './images/LevelsMenu.png')).convert_alpha()
 levels_menu_img = pygame.transform.scale(levels_menu_img, (round((levels_menu_img.get_width()*screenObject.current_w)/1920), round((levels_menu_img.get_height()*screenObject.current_h)/1080)))
+win_screen_img = pygame.image.load(os.path.join(os.getcwd(), './images/WinScreen.png')).convert_alpha()
+win_screen_img = pygame.transform.scale(win_screen_img, (round((win_screen_img.get_width()*screenObject.current_w)/1920), round((win_screen_img.get_height()*screenObject.current_h)/1080)))
+death_screen_img = pygame.image.load(os.path.join(os.getcwd(), './images/DeathScreen.png')).convert_alpha()
+death_screen_img = pygame.transform.scale(death_screen_img, (round((death_screen_img.get_width()*screenObject.current_w)/1920), round((death_screen_img.get_height()*screenObject.current_h)/1080)))
 
 
 # colors

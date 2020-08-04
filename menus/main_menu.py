@@ -25,6 +25,7 @@ def draw_menu(win, menu):
 
 def main_menu_func(win):
     global menu
+    variables.current_obstacle_number = 0
     run = True
     while run:
         pygame.time.Clock().tick(60)

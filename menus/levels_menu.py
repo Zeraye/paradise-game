@@ -3,7 +3,7 @@ import variables
 import main
 import json
 import menus.main_menu
-import levels.level01
+import levels.easy.level01
 
 with open("levels.json", "r+") as read_file:
     data = json.load(read_file)
@@ -168,6 +168,7 @@ def draw_menu(win):
 
 def levels_menu_func(win):
     global levels_list, stage_list, levels_num, stage, levels_easy, levels_med, levels_hard
+    variables.current_obstacle_number = 0
     levels_list = [
         [True, False, False, False],
         [False, False, False],
@@ -215,6 +216,10 @@ def levels_menu_func(win):
                 if event.key == pygame.K_ESCAPE:
                     menus.main_menu.main_menu_func(win)
                 if event.key == pygame.K_RETURN:
-                    levels.level01.main(win)
+                    if stage == 0:
+                        if levels_num == 0:
+                            levels.easy.level01.main_level_func(win)
+                        elif levels_num == 1 and levels_easy[0]:
+                            levels.easy.level01.main_level_func(win)
 
             draw_menu(win)

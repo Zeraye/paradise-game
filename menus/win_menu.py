@@ -1,23 +1,12 @@
 import pygame
 import variables
-from menus import main_menu
 import main
+from menus import main_menu
 
 
-def draw_texts(win):
-    font = pygame.font.SysFont('lucidaconsole', variables.font_size_100, bold=True)
-    textsurface = font.render("Don't touch RED square!", False, variables.RED)
-    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) - 150))
-    font = pygame.font.SysFont('lucidaconsole', variables.font_size_80)
-    textsurface = font.render('You have won!', False, variables.BLUE_LIGT)
-    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) + 50))
-    textsurface = font.render('Click ENTER to return to menus', False, variables.BLUE_LIGT)
-    win.blit(textsurface, (round(main.WIDTH - textsurface.get_width()) / 2, round((main.HEIGHT - textsurface.get_height()) / 2) + 250))
-
-
-def draw_menu(win):
-    win.fill(variables.YELLOW)
-    draw_texts(win)
+def draw(win):
+    win.fill(variables.BLACK)
+    win.blit(variables.win_screen_img, (((main.WIDTH - variables.win_screen_img.get_width()) / 2), (main.HEIGHT - variables.win_screen_img.get_height()) / 2))
     pygame.display.update()
 
 
@@ -35,4 +24,4 @@ def win_menu_func(win):
                     run = False
                     main_menu.main_menu_func(win)
 
-        draw_menu(win)
+        draw(win)

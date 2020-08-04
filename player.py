@@ -13,8 +13,8 @@ class Player:
         reset_pos(self.row, self.col, 1)
         self.row = row
         self.col = col
+        update_pos(row, col, 1)
         if check_death(row, col):
             return True
         else:
-            update_pos(row, col, 1)
             return False

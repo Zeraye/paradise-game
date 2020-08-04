@@ -1,7 +1,13 @@
 import random
 import numbers_list
 import variables
+import json
 from board import board
+
+
+def write_json(data, filename):
+    with open(filename, 'w') as f:
+        json.dump(data, f)
 
 
 def update_pos(row, col, obstacle_type):
@@ -112,35 +118,36 @@ def print_board():
 
 
 def give_randon(start, end):
-    if variables.current_obstacle_number > 999:
-        variables.current_obstacle_number = 0
-    variables.current_obstacle_number += 1
-    if start == 0:
-        if end == 1:
-            return numbers_list.list_01[variables.current_obstacle_number]
-        elif end == 2:
-            return numbers_list.list_02[variables.current_obstacle_number]
-        elif end == 3:
-            return numbers_list.list_03[variables.current_obstacle_number]
-        elif end == 4:
-            return numbers_list.list_04[variables.current_obstacle_number]
-        elif end == 5:
-            return numbers_list.list_05[variables.current_obstacle_number]
-        elif end == 6:
-            return numbers_list.list_06[variables.current_obstacle_number]
-        elif end == 7:
-            return numbers_list.list_07[variables.current_obstacle_number]
-        elif end == 8:
-            return numbers_list.list_08[variables.current_obstacle_number]
-        elif end == 9:
-            return numbers_list.list_09[variables.current_obstacle_number]
-        elif end == 10:
-            return numbers_list.list_010[variables.current_obstacle_number]
-        elif end == 11:
-            return numbers_list.list_011[variables.current_obstacle_number]
-    elif start == 1:
-        if end == 9:
-            return numbers_list.list_19[variables.current_obstacle_number]
-    elif start == 2:
-        if end == 8:
-            return numbers_list.list_28[variables.current_obstacle_number]
+    return random.randint(start, end)
+    # if variables.current_obstacle_number > 999:
+    #     variables.current_obstacle_number = 0
+    # variables.current_obstacle_number += 1
+    # if start == 0:
+    #     if end == 1:
+    #         return numbers_list.list_01[variables.current_obstacle_number]
+    #     elif end == 2:
+    #         return numbers_list.list_02[variables.current_obstacle_number]
+    #     elif end == 3:
+    #         return numbers_list.list_03[variables.current_obstacle_number]
+    #     elif end == 4:
+    #         return numbers_list.list_04[variables.current_obstacle_number]
+    #     elif end == 5:
+    #         return numbers_list.list_05[variables.current_obstacle_number]
+    #     elif end == 6:
+    #         return numbers_list.list_06[variables.current_obstacle_number]
+    #     elif end == 7:
+    #         return numbers_list.list_07[variables.current_obstacle_number]
+    #     elif end == 8:
+    #         return numbers_list.list_08[variables.current_obstacle_number]
+    #     elif end == 9:
+    #         return numbers_list.list_09[variables.current_obstacle_number]
+    #     elif end == 10:
+    #         return numbers_list.list_010[variables.current_obstacle_number]
+    #     elif end == 11:
+    #         return numbers_list.list_011[variables.current_obstacle_number]
+    # elif start == 1:
+    #     if end == 9:
+    #         return numbers_list.list_19[variables.current_obstacle_number]
+    # elif start == 2:
+    #     if end == 8:
+    #         return numbers_list.list_28[variables.current_obstacle_number]

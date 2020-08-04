@@ -363,7 +363,7 @@ class ObstacleExclusively:
             # TODO: setting deadly obstacles
             y = self.col - 2
             temp_array = []
-            if y > 0:
+            if y >= 0:
                 i = j = 0
                 while i < y:
                     while j < 11:
@@ -382,7 +382,7 @@ class ObstacleExclusively:
                 i = 0
                 y += 1
             x = self.row - 2
-            if x > 0:
+            if x >= 0:
                 i = j = 0
                 while i < x:
                     while j < 11:
